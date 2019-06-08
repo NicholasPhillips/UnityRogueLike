@@ -42,9 +42,7 @@ public class Inventory : MonoBehaviour
 
 		if (Spell == null)
 		{
-			Spell = ScriptableObject.CreateInstance<TargetSpell>();
-			Spell.Effect = new DamageTarget();
-			Spell.Targeter = new MouseTargeter();
+			Spell = new TargetSpell();
 		}
 
 		DontDestroyOnLoad(gameObject);

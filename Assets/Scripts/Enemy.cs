@@ -49,10 +49,10 @@ public class Enemy : MovingObject
 		else
 			xDir = _target.position.x > transform.position.x ? 1 : -1;
 
-		AttemptMove<Player>(xDir, yDir);
+		AttemptMove(xDir, yDir, true);
 	}
 
-	protected override void AttemptMove<T>(int xDir, int yDir)
+	protected override void AttemptMove(int xDir, int yDir, bool isEnemy = false)
 	{
 		if (_skipMove)
 		{
@@ -60,7 +60,7 @@ public class Enemy : MovingObject
 			return;
 		}
 
-		base.AttemptMove<T>(xDir, yDir);
+		base.AttemptMove(xDir, yDir, isEnemy);
 
 		_skipMove = true;
 	}

@@ -53,7 +53,17 @@ public class InventorySlot : MonoBehaviour
 	{
 		if (_item != null)
 		{
-			Tooltip.text = "I am " + _item.Type;
+			string text = "";
+			if (_item.Effect != null)
+			{
+				text = _item.Effect.Name + " ";
+			}
+			text += _item.Type;
+			if (_item.Attribute != null)
+			{
+				text += " " + _item.Attribute.Name;
+			}
+			Tooltip.text = text;
 			TooltipBackground.gameObject.SetActive(true);
 		}
 	}

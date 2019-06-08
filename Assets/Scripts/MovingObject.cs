@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
-	public float MoveTime = 0.1f;
+	public float MoveTime = 0.001f;
 	public LayerMask BlockingLayer;
 
 	private BoxCollider2D _boxCollider;
@@ -49,17 +49,38 @@ public abstract class MovingObject : MonoBehaviour
 		return false;
 	}
 
-	protected virtual void AttemptMove<T>(int xDir, int yDir) where T : Component
+	protected virtual void AttemptMove(int xDir, int yDir, bool isEnemy = false)
 	{
 		RaycastHit2D hit;
 		bool canMove = Move(xDir, yDir, out hit);
 
 		if (hit.transform == null)
 			return;
-		T hitComponent = hit.transform.GetComponent<T>();
 
-		if (!canMove && hitComponent != null)
-			OnCantMove(hitComponent);
+		if (isEnemy)
+		{
+			var hitEnemmy = hit.transform.GetComponent<Player>();
+			
+			if (!canMove && hitEnemmy != null)
+			{
+				OnCantMove(hitEnemmy);
+			}
+		}
+		else
+		{
+			var hitWall = hit.transform.GetComponent<Wall>();
+			var hitEnemy = hit.transform.GetComponent<Enemy>();
+
+			if (!canMove && hitWall != null)
+			{
+				OnCantMove(hitWall);
+			}
+			else if (!canMove && hitEnemy != null)
+			{
+				OnCantMove(hitEnemy);
+			}
+		}
+
 	}
 
 	protected abstract void OnCantMove<T>(T component) where T:Component;

@@ -3,7 +3,6 @@ using Assets.Scripts.Enums;
 using Assets.Scripts.Items;
 using UnityEngine;
 
-[CreateAssetMenu]
 public abstract class Spell : ScriptableObject
 {
 	protected Spell(Guid? id)
@@ -18,17 +17,24 @@ public abstract class Spell : ScriptableObject
 
 public class TargetSpell : Spell
 {
-	public TargetSpell(Guid? id) : base(id)
+	private TargetEffect _effect;
+
+	private Targeter _targeter;
+
+	private string _visualEffectKey;
+
+	public TargetSpell(Guid? id = null) : base(id)
 	{
+
+		_effect = new DamageTarget();
+		_targeter = new MouseTargeter();
+		_visualEffectKey = "Explosion";
 	}
 
 	public override void UseSpell()
 	{
-		Effect.OnUse(Targeter.AquireTargets());
+		_effect.OnUse(_targeter.AquireTargets());
+		GameManager.Instance.EffectScript.DisplaySpellEffect(_visualEffectKey);
 	}
-
-	public TargetEffect Effect;
-
-	public Targeter Targeter;
 }
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Assets.Scripts.Items;
 using UnityEngine.UI;
 
@@ -64,15 +66,6 @@ public class Player : MovingObject
 			Inventory.Instance.Spell.UseSpell();
 
 			GameManager.Instance.PlayersTurn = false;
-			GameManager.Instance.EffectScript.DisplaySpellEffect();
-		}
-
-		if (Input.GetMouseButtonUp(2))
-		{
-			Inventory.Instance.Spell.UseSpell();
-
-			GameManager.Instance.PlayersTurn = false;
-			GameManager.Instance.EffectScript.DisplaySpellEffect();
 		}
 
 		if (Input.GetKeyUp(KeyCode.PageUp))
@@ -89,14 +82,15 @@ public class Player : MovingObject
 
 		if (horizontal != 0 || vertical != 0)
 		{
-			AttemptMove<Wall>(horizontal, vertical);
-			AttemptMove<Enemy>(horizontal, vertical);
+			AttemptMove(horizontal, vertical);
+
+			//GatherNNData();
 		}
 	}
 
-	protected override void AttemptMove<T>(int xDir, int yDir)
+	protected override void AttemptMove(int xDir, int yDir, bool isEnemy = false)
 	{
-		base.AttemptMove<T>(xDir, yDir);
+		base.AttemptMove(xDir, yDir);
 
 		CheckIfGameOver();
 
@@ -174,5 +168,24 @@ public class Player : MovingObject
 		{
 			GameManager.Instance.GameOver();
 		}
+	}
+
+	private void GatherNNData()
+	{
+		var player = transform.position;
+		var localArea = new List<Vector3>();
+		for (int i = -3; i < 3; i++)
+		{
+			for (int j = -3; j < 3; j++)
+			{
+				localArea.Add(new Vector3(Mathf.Round(player.x + i) - 0.5f, Mathf.Round(player.y + j) + 0.5f, 0));
+			}
+		}
+		var hits = new List<RaycastHit2D>();
+		foreach (var vector3 in localArea)
+		{
+			hits.AddRange(Physics2D.RaycastAll(new Vector2(vector3.x, vector3.y), Vector2.zero, 0f));
+		}
+		
 	}
 }

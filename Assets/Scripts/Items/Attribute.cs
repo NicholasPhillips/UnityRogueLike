@@ -12,5 +12,7 @@ public class Attribute
 		Health = health;
 		Damage = damage;
 	}
+
+	public string Name { get; set; }
 }
 

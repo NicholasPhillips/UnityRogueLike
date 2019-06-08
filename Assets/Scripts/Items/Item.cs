@@ -13,15 +13,16 @@ public class Item : ScriptableObject
 	public Guid Id { get; set; }
 	public Sprite Sprite;
 	public ItemTypes Type;
+	public string Name { get; set; }
+	public SelfEffect Effect;
+	public Attribute Attribute;
 }
 
 public class Potion : Item
 {
-	public SelfEffect Effect;
 }
 
 public class Helmet : Item
 {
-	public Attribute Attribute;
 }
 

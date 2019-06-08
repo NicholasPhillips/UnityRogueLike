@@ -5,16 +5,18 @@ using Random = UnityEngine.Random;
 public abstract class SelfEffect
 {
 	public abstract void OnUse();
+	public int Value;
+	public abstract string Name { get; }
 }
 
 public class HealSelf : SelfEffect
 {
-	public int Value;
-
 	public HealSelf()
 	{
 		Value = Random.Range(1,100);
 	}
+	
+	public override string Name { get {return "Healing";} }
 
 	public override void OnUse()
 	{
@@ -24,12 +26,12 @@ public class HealSelf : SelfEffect
 
 public class DamageSelf : SelfEffect
 {
-	public int Value;
-
 	public DamageSelf()
 	{
 		Value = Random.Range(-100, -1);
 	}
+
+	public override string Name { get { return "Hurting"; } }
 
 	public override void OnUse()
 	{
