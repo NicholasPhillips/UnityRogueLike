@@ -83,8 +83,6 @@ public class Player : MovingObject
 		if (horizontal != 0 || vertical != 0)
 		{
 			AttemptMove(horizontal, vertical);
-
-			//GatherNNData();
 		}
 	}
 
@@ -168,24 +166,5 @@ public class Player : MovingObject
 		{
 			GameManager.Instance.GameOver();
 		}
-	}
-
-	private void GatherNNData()
-	{
-		var player = transform.position;
-		var localArea = new List<Vector3>();
-		for (int i = -3; i < 3; i++)
-		{
-			for (int j = -3; j < 3; j++)
-			{
-				localArea.Add(new Vector3(Mathf.Round(player.x + i) - 0.5f, Mathf.Round(player.y + j) + 0.5f, 0));
-			}
-		}
-		var hits = new List<RaycastHit2D>();
-		foreach (var vector3 in localArea)
-		{
-			hits.AddRange(Physics2D.RaycastAll(new Vector2(vector3.x, vector3.y), Vector2.zero, 0f));
-		}
-		
 	}
 }
