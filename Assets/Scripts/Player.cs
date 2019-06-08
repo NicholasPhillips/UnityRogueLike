@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Assets.Scripts.Items;
 using UnityEngine.UI;
 
@@ -8,15 +6,23 @@ public class Player : MovingObject
 {
 	public float RestartLevelDelay = 1f;
 	public Text HealthText;
+	public float runSpeed = 10.0f;
+
+	private Rigidbody2D _body;
 
 	private int _damage;
 	private Animator _animator;
 	private int _maxHealthPoints;
 	private int _currentHealthPoints;
 
+	private float horizontal = 0;
+	private float vertical = 0;
+	private float moveLimiter = 0.7f;
+
 	// Use this for initialization
 	protected override void Start()
 	{
+		_body = GetComponent<Rigidbody2D>();
 		_animator = GetComponent<Animator>();
 		Inventory.Instance.OnEquippableItemAdded += SetAttributes;
 		SetAttributes(this, null);
@@ -48,11 +54,6 @@ public class Player : MovingObject
 	// Update is called once per frame
 	void Update()
 	{
-		if (!GameManager.Instance.PlayersTurn) return;
-
-		int horizontal = 0;
-		int vertical = 0;
-
 		horizontal = (int)Input.GetAxisRaw("Horizontal");
 		vertical = (int)Input.GetAxisRaw("Vertical");
 
@@ -64,8 +65,6 @@ public class Player : MovingObject
 		if (Input.GetMouseButtonUp(1))
 		{
 			Inventory.Instance.Spell.UseSpell();
-
-			GameManager.Instance.PlayersTurn = false;
 		}
 
 		if (Input.GetKeyUp(KeyCode.PageUp))
@@ -76,39 +75,18 @@ public class Player : MovingObject
 		{
 			gameObject.GetComponentInChildren<Camera>().orthographicSize--;
 		}
-
-		if (horizontal != 0)
-			vertical = 0;
-
-		if (horizontal != 0 || vertical != 0)
-		{
-			AttemptMove(horizontal, vertical);
-		}
 	}
 
-	protected override void AttemptMove(int xDir, int yDir, bool isEnemy = false)
+	void FixedUpdate()
 	{
-		base.AttemptMove(xDir, yDir);
-
-		CheckIfGameOver();
-
-		GameManager.Instance.PlayersTurn = false;
-	}
-
-	protected override void OnCantMove<T>(T component)
-	{
-		Wall hitWall = component as Wall;
-		if (hitWall != null)
+		if (horizontal != 0 && vertical != 0) // Check for diagonal movement
 		{
-			hitWall.DamageWall(_damage);
-			_animator.SetTrigger("PlayerChop");
+			// limit movement speed diagonally, so you move at 70% speed
+			horizontal *= moveLimiter;
+			vertical *= moveLimiter;
 		}
-		Enemy hitEnemy = component as Enemy;
-		if (hitEnemy != null)
-		{
-			hitEnemy.ModifyHealth(-_damage);
-			_animator.SetTrigger("PlayerChop");
-		}
+
+		_body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
 	}
 
 	private void Restart()

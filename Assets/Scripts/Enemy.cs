@@ -20,15 +20,7 @@ public class Enemy : MovingObject
 		base.Start();
 	}
 
-	protected override void OnCantMove<T>(T component)
-	{
-		Player hitPlayer = component as Player;
-
-		_animator.SetTrigger("EnemyAttack");
-
-		hitPlayer.ModifyHealth(-PlayerDamage);
-	}
-
+	
 	public void ModifyHealth(int value)
 	{
 		Health = Health + value;
@@ -49,19 +41,7 @@ public class Enemy : MovingObject
 		else
 			xDir = _target.position.x > transform.position.x ? 1 : -1;
 
-		AttemptMove(xDir, yDir, true);
+		Debug.Log($"{xDir} {yDir}");
 	}
 
-	protected override void AttemptMove(int xDir, int yDir, bool isEnemy = false)
-	{
-		if (_skipMove)
-		{
-			_skipMove = false;
-			return;
-		}
-
-		base.AttemptMove(xDir, yDir, isEnemy);
-
-		_skipMove = true;
-	}
 }
