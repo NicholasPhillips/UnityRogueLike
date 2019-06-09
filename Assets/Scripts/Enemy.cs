@@ -40,7 +40,6 @@ public class Enemy : MovingObject
 
 	public void MoveEnemy()
 	{
-		//var distance = Vector2.Distance(_target.position, transform.position);
 		float xDir = 0;
 		float yDir = 0;
 
