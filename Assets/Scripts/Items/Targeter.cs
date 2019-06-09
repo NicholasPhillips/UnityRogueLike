@@ -4,14 +4,24 @@ namespace Assets.Scripts.Items
 {
 	public abstract class Targeter
 	{
-		public abstract RaycastHit2D[] AquireTargets();
+		public abstract Collider2D[] AquireTargets();
 	}
 
 	public class MouseTargeter : Targeter
 	{
-		public override RaycastHit2D[] AquireTargets()
+		private float _radius = 1f;
+		private int _blockingLayer;
+
+		public MouseTargeter()
 		{
-			return Physics2D.RaycastAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0f);
+			_blockingLayer = 1 << 8;
+		}
+		
+		public override Collider2D[] AquireTargets()
+		{
+			//Physics2D.CircleCast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), _radius, );
+			var hitColliders = Physics2D.OverlapCircleAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), _radius, _blockingLayer);
+			return hitColliders;
 		}
 	}
 }

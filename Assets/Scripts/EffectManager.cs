@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using System;
 
 public class EffectManager : MonoBehaviour
@@ -27,18 +26,10 @@ public class EffectManager : MonoBehaviour
 	{
 		var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		pos.z = 0;
-		pos.x = pos.x - 0.5f;
-		pos.y = pos.y + 0.5f;
-		var clone = (GameObject)Instantiate(_spellEffects[effectKey], pos, Quaternion.identity);
+		pos.x = pos.x - 1f;
+		pos.y = pos.y + 1f;
+		var spellEffect = _spellEffects[effectKey];
+		var clone = (GameObject)Instantiate(spellEffect, pos, Quaternion.identity);
 		Destroy(clone, 1);
-	}
-
-	public void DisplaySpellEffect(List<Vector3> asdasd)
-	{
-		//foreach (var asd in asdasd)
-		//{
-		//	var clone = (GameObject)Instantiate(SpellEffects.First(), asd, Quaternion.identity);
-		//	Destroy(clone, 1);
-		//}
 	}
 }

@@ -41,7 +41,7 @@ public class DamageSelf : SelfEffect
 
 public abstract class TargetEffect
 {
-	public abstract void OnUse(RaycastHit2D[] hits);
+	public abstract void OnUse(Collider2D[] hits);
 }
 
 
@@ -54,18 +54,18 @@ public class DamageTarget : TargetEffect
 		Value = Random.Range(1, 100);
 	}
 
-	public override void OnUse(RaycastHit2D[] hits)
+	public override void OnUse(Collider2D[] colliders)
 	{
-		foreach (var hit in hits)
+		foreach (var collider in colliders)
 		{
-			if (hit.collider != null && hit.collider.gameObject.tag == "Enemy")
+			if (collider != null && collider.gameObject.tag == "Enemy")
 			{
-				var enemy = hit.collider.gameObject.GetComponent<Enemy>();
+				var enemy = collider.gameObject.GetComponent<Enemy>();
 				enemy.ModifyHealth(-Value);
 			}
-			if (hit.collider != null && hit.collider.gameObject.tag == "Untagged")
+			if (collider != null && collider.gameObject.tag == "Untagged")
 			{
-				var wall = hit.collider.gameObject.GetComponent<Wall>();
+				var wall = collider.gameObject.GetComponent<Wall>();
 				if (wall != null)
 				{
 					wall.DamageWall(Value);
