@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
 
 		if (Spell == null)
 		{
-			Spell = new TargetSpell();
+			Spell = new TargetSpell();			
 		}
 
 		DontDestroyOnLoad(gameObject);

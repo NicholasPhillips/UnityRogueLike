@@ -1,27 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000010102311048}
-  m_IsPrefabParent: 1
 --- !u!1 &1000010102311048
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
-  - 4: {fileID: 4000010586299046}
-  - 114: {fileID: 114000014088707942}
-  - 114: {fileID: 114000014165265776}
-  - 114: {fileID: 114000012090404564}
+  - component: {fileID: 4000010586299046}
+  - component: {fileID: 114000014088707942}
+  - component: {fileID: 114000014165265776}
+  - component: {fileID: 114000012090404564}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,35 +21,24 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4000010586299046
 Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010102311048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000012090404564
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010102311048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cb4b3ab0ae03f4f838b782a1dd110b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpellEffects:
-  - {fileID: 1000011910050788, guid: 652c45e8347ebb349b58ade7a66cbf94, type: 2}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114000014088707942
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010102311048}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -67,15 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelStartDelay: 2
-  TurnDelay: 0.1
   BoardScript: {fileID: 0}
   EffectScript: {fileID: 0}
-  PlayersTurn: 1
 --- !u!114 &114000014165265776
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010102311048}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -93,28 +71,43 @@ MonoBehaviour:
   LootCount:
     Minimum: 1
     Maximum: 3
-  Exit: {fileID: 1000014030089710, guid: 483e0b1dc5b5d35408700f891c5b002f, type: 2}
+  Exit: {fileID: 1000014030089710, guid: 483e0b1dc5b5d35408700f891c5b002f, type: 3}
   FloorTiles:
-  - {fileID: 1000011908539862, guid: 2f8991024dda5d7459b656fe05fa0e06, type: 2}
-  - {fileID: 1000013756172292, guid: 65a599f25d2f63c40aa234c6aa734224, type: 2}
-  - {fileID: 1000010434883630, guid: eccd2866586065d43a9240490fa86697, type: 2}
-  - {fileID: 1000013487536918, guid: e6ba13784721be145b7ff2705ab217d1, type: 2}
-  - {fileID: 1000011272708224, guid: 65e8347b87f27ef45bd54b12fda25a11, type: 2}
-  - {fileID: 1000010264898682, guid: 1aae11db641ac634088569853a65d497, type: 2}
-  - {fileID: 1000011939343756, guid: f049db9db4e4239488191a6ea4066930, type: 2}
+  - {fileID: 1000011908539862, guid: 2f8991024dda5d7459b656fe05fa0e06, type: 3}
+  - {fileID: 1000013756172292, guid: 65a599f25d2f63c40aa234c6aa734224, type: 3}
+  - {fileID: 1000010434883630, guid: eccd2866586065d43a9240490fa86697, type: 3}
+  - {fileID: 1000013487536918, guid: e6ba13784721be145b7ff2705ab217d1, type: 3}
+  - {fileID: 1000011272708224, guid: 65e8347b87f27ef45bd54b12fda25a11, type: 3}
+  - {fileID: 1000010264898682, guid: 1aae11db641ac634088569853a65d497, type: 3}
+  - {fileID: 1000011939343756, guid: f049db9db4e4239488191a6ea4066930, type: 3}
   WallTiles:
-  - {fileID: 1000012507669096, guid: 213841e0294df994db32afc1c17daad4, type: 2}
-  - {fileID: 1000010059696354, guid: bbb31b519602aa2468ecbb66316e55db, type: 2}
-  - {fileID: 1000013372108524, guid: 7f6e7f591742bd94cbf4b000625ba0f2, type: 2}
-  - {fileID: 1000013480447298, guid: f8981ddb8bb6d5245bc1de774760dc28, type: 2}
-  - {fileID: 1000012659350458, guid: b0b9ef2df8106654baa8a7bd80df9032, type: 2}
-  - {fileID: 1000013880759816, guid: 6e94b7fe6ed8ea64b8076a65f509ef0e, type: 2}
-  - {fileID: 1000010922565966, guid: bbd3890fc9f6670419badc543354a0b6, type: 2}
-  - {fileID: 1000010876396734, guid: 0c6419cf5b3ae914f94de8534af5e77b, type: 2}
+  - {fileID: 1000012507669096, guid: 213841e0294df994db32afc1c17daad4, type: 3}
+  - {fileID: 1000010059696354, guid: bbb31b519602aa2468ecbb66316e55db, type: 3}
+  - {fileID: 1000013372108524, guid: 7f6e7f591742bd94cbf4b000625ba0f2, type: 3}
+  - {fileID: 1000013480447298, guid: f8981ddb8bb6d5245bc1de774760dc28, type: 3}
+  - {fileID: 1000012659350458, guid: b0b9ef2df8106654baa8a7bd80df9032, type: 3}
+  - {fileID: 1000013880759816, guid: 6e94b7fe6ed8ea64b8076a65f509ef0e, type: 3}
+  - {fileID: 1000010922565966, guid: bbd3890fc9f6670419badc543354a0b6, type: 3}
+  - {fileID: 1000010876396734, guid: 0c6419cf5b3ae914f94de8534af5e77b, type: 3}
   EnemyTiles:
-  - {fileID: 1000013746123568, guid: ae2c887d78f93894286536917c966461, type: 2}
-  - {fileID: 1000010287734598, guid: 18e6172ecbb2d6e4d929920d3ee4a90b, type: 2}
+  - {fileID: 1000013746123568, guid: ae2c887d78f93894286536917c966461, type: 3}
+  - {fileID: 1000010287734598, guid: 18e6172ecbb2d6e4d929920d3ee4a90b, type: 3}
   OuterWallTiles:
-  - {fileID: 1000010690331566, guid: 42fef213bd676bf4a8cf275f95c6c668, type: 2}
-  - {fileID: 1000013339300722, guid: 2a3f46594c840ab42a5c113267e7d5c9, type: 2}
-  - {fileID: 1000012337320686, guid: 41aa93da848127448bd48d3918a9d05e, type: 2}
+  - {fileID: 1000010690331566, guid: 42fef213bd676bf4a8cf275f95c6c668, type: 3}
+  - {fileID: 1000013339300722, guid: 2a3f46594c840ab42a5c113267e7d5c9, type: 3}
+  - {fileID: 1000012337320686, guid: 41aa93da848127448bd48d3918a9d05e, type: 3}
+--- !u!114 &114000012090404564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010102311048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74cb4b3ab0ae03f4f838b782a1dd110b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellEffects:
+  - Key: Explosion
+    Effect: {fileID: 1000011910050788, guid: 652c45e8347ebb349b58ade7a66cbf94, type: 3}
