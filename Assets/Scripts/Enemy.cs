@@ -7,61 +7,61 @@ public class Enemy : MovingObject
 	public int PlayerDamage;
 	public int Health = 1;
 	public event EventHandler OnEnemyDeath;
+	public float speed = 5f;
 
 	private Animator _animator;
 	private Transform _target;
 	private bool _skipMove;
-	
+	private TDCharacterController2D _controller;
+
+	private float horizontal = 0;
+	private float vertical = 0;
+	private float moveLimiter = 0.7f;
+	private float attackRange = 1.25f;
+
 	protected override void Start ()
 	{
+		_controller = GetComponent<TDCharacterController2D>();
 		GameManager.Instance.AddEnemyToList(this);
 		_animator = GetComponent<Animator>();
 		_target = GameObject.FindGameObjectWithTag("Player").transform;
 		base.Start();
 	}
 
-	protected override void OnCantMove<T>(T component)
-	{
-		Player hitPlayer = component as Player;
-
-		_animator.SetTrigger("EnemyAttack");
-
-		hitPlayer.ModifyHealth(-PlayerDamage);
-	}
-
+	
 	public void ModifyHealth(int value)
 	{
 		Health = Health + value;
 		if (Health <= 0)
 		{
-			if(OnEnemyDeath != null)
-				OnEnemyDeath(this, null);
+			OnEnemyDeath?.Invoke(this, null);
 		}
 	}
 
 	public void MoveEnemy()
 	{
-		int xDir = 0;
-		int yDir = 0;
+		float xDir = 0;
+		float yDir = 0;
 
-		if (Mathf.Abs(_target.position.x - transform.position.x) < float.Epsilon)
-			yDir = _target.position.y > transform.position.y ? 1 : -1;
-		else
-			xDir = _target.position.x > transform.position.x ? 1 : -1;
+		var heading = _target.position - transform.position;
+		var direction = heading / heading.magnitude;
 
-		AttemptMove(xDir, yDir, true);
-	}
-
-	protected override void AttemptMove(int xDir, int yDir, bool isEnemy = false)
-	{
-		if (_skipMove)
-		{
-			_skipMove = false;
+		if(heading.sqrMagnitude < attackRange * attackRange) { 
+			//Attempt attack
 			return;
 		}
 
-		base.AttemptMove(xDir, yDir, isEnemy);
 
-		_skipMove = true;
+		yDir = direction.y;
+		xDir = direction.x;
+		if (xDir != 0 && yDir != 0) // Check for diagonal movement
+		{
+			// limit movement speed diagonally, so you move at 70% speed
+			xDir *= moveLimiter;
+			yDir *= moveLimiter;
+		}
+
+		_controller.Move(new Vector2(xDir * speed * Time.deltaTime, yDir * speed * Time.deltaTime));
 	}
+
 }

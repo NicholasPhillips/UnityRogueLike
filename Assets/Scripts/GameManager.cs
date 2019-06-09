@@ -8,11 +8,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	public float LevelStartDelay = 0f;
-	public float TurnDelay = .1f;
 	public static GameManager Instance;
 	public BoardManager BoardScript;
 	public EffectManager EffectScript;
-	[HideInInspector] public bool PlayersTurn = true;
 
 	private Text _levelText;
 	private GameObject _levelImage;
@@ -62,7 +60,7 @@ public class GameManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		if (PlayersTurn || _enemiesMoving || _doingSetup)
+		if (_enemiesMoving || _doingSetup)
 			return;
 
 		StartCoroutine(MoveEnemies());
@@ -87,19 +85,16 @@ public class GameManager : MonoBehaviour
 	IEnumerator MoveEnemies()
 	{
 		_enemiesMoving = true;
-		yield return new WaitForSeconds(TurnDelay);
 		if (_enemies.Count == 0)
 		{
-			yield return new WaitForSeconds(TurnDelay);
+			yield return new WaitForSeconds(0);
 		}
 
 		foreach (var enemy in _enemies)
 		{
 			enemy.MoveEnemy();
-			yield return new WaitForSeconds(enemy.MoveTime);
+			yield return new WaitForSeconds(0);
 		}
-
-		PlayersTurn = true;
 		_enemiesMoving = false;
 	}
 
