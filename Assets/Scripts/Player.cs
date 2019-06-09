@@ -8,8 +8,6 @@ public class Player : MovingObject
 	public Text HealthText;
 	public float runSpeed = 10.0f;
 
-	private Rigidbody2D _body;
-
 	private int _damage;
 	private Animator _animator;
 	private int _maxHealthPoints;
@@ -19,10 +17,12 @@ public class Player : MovingObject
 	private float vertical = 0;
 	private float moveLimiter = 0.7f;
 
+	private TDCharacterController2D _controller;
+
 	// Use this for initialization
 	protected override void Start()
 	{
-		_body = GetComponent<Rigidbody2D>();
+		_controller = GetComponent<TDCharacterController2D>();
 		_animator = GetComponent<Animator>();
 		Inventory.Instance.OnEquippableItemAdded += SetAttributes;
 		SetAttributes(this, null);
@@ -86,7 +86,7 @@ public class Player : MovingObject
 			vertical *= moveLimiter;
 		}
 
-		_body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+		_controller.Move(new Vector2(horizontal * runSpeed * Time.deltaTime, vertical * runSpeed * Time.deltaTime));
 	}
 
 	private void Restart()
