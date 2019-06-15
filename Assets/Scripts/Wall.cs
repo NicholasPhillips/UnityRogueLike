@@ -14,10 +14,12 @@ public class Wall : MonoBehaviour
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
-	public void DamageWall(int loss)
+	public void ModifiyHealth(int value)
 	{
-		_spriteRenderer.sprite = DmgSprite;
-		hp -= loss;
+		if(value < 0)
+			_spriteRenderer.sprite = DmgSprite;
+
+		hp = hp + value;
 
 		if (hp <= 0)
 			gameObject.SetActive(false);

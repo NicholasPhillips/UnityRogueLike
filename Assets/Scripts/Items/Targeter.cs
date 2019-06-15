@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Assets.Scripts.Items
 {
 	public abstract class Targeter
 	{
 		public abstract Collider2D[] AquireTargets();
+		public abstract Collider2D[] AquireTargets(float radius = 1f);
 	}
 
 	public class MouseTargeter : Targeter
 	{
-		private float _radius = 1f;
 		private int _blockingLayer;
 
 		public MouseTargeter()
@@ -17,11 +18,17 @@ namespace Assets.Scripts.Items
 			_blockingLayer = 1 << 8;
 		}
 		
-		public override Collider2D[] AquireTargets()
+		public override Collider2D[] AquireTargets(float radius = 1f)
 		{
 			//Physics2D.CircleCast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), _radius, );
-			var hitColliders = Physics2D.OverlapCircleAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), _radius, _blockingLayer);
+			var hitColliders = Physics2D.OverlapCircleAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), radius, _blockingLayer);
 			return hitColliders;
+		}
+
+		public override Collider2D[] AquireTargets()
+		{
+			var hitColliders = Physics2D.RaycastAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0, _blockingLayer);
+			return hitColliders.Select(h => h.collider).ToArray();
 		}
 	}
 }

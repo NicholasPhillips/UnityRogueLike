@@ -26,8 +26,6 @@ public class EffectManager : MonoBehaviour
 	{
 		var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		pos.z = 0;
-		pos.x = pos.x - 1f;
-		pos.y = pos.y + 1f;
 		var spellEffect = _spellEffects[effectKey];
 		var clone = (GameObject)Instantiate(spellEffect, pos, Quaternion.identity);
 		Destroy(clone, 1);

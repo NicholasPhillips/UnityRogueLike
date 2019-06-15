@@ -56,21 +56,6 @@ public class DamageTarget : TargetEffect
 
 	public override void OnUse(Collider2D[] colliders)
 	{
-		foreach (var collider in colliders)
-		{
-			if (collider != null && collider.gameObject.tag == "Enemy")
-			{
-				var enemy = collider.gameObject.GetComponent<Enemy>();
-				enemy.ModifyHealth(-Value);
-			}
-			if (collider != null && collider.gameObject.tag == "Untagged")
-			{
-				var wall = collider.gameObject.GetComponent<Wall>();
-				if (wall != null)
-				{
-					wall.DamageWall(Value);
-				}
-			}
-		}
+		colliders.DealDamageToAllTargets(Value);
 	}
 }

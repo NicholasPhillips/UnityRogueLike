@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Items;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Player : MovingObject
 {
@@ -17,7 +18,13 @@ public class Player : MovingObject
 	private float vertical = 0;
 	private float moveLimiter = 0.7f;
 
+	private float attackRange = 1.25f;
+	private float attackRate = 1.0f;
+	private float nextAttack = 0f;
+
 	private TDCharacterController2D _controller;
+
+	private MouseTargeter mouseTargeter = new MouseTargeter();
 
 	// Use this for initialization
 	protected override void Start()
@@ -65,6 +72,24 @@ public class Player : MovingObject
 		if (Input.GetMouseButtonUp(1))
 		{
 			Inventory.Instance.Spell.UseSpell();
+		}
+
+		if (Input.GetMouseButton(0))
+		{
+			if (Time.time > nextAttack)
+			{
+				var collisions = mouseTargeter.AquireTargets();
+				var target = collisions.FirstOrDefault();
+				if(target != null)
+				{
+					if(transform.IsInRange(target.transform, attackRange))
+					{
+						nextAttack = Time.time + attackRate;
+						_animator.SetTrigger("PlayerChop");
+						collisions.FirstOrDefault().DealDamageToTarget(_damage);
+					}
+				}				
+			}
 		}
 
 		if (Input.GetKeyUp(KeyCode.PageUp))

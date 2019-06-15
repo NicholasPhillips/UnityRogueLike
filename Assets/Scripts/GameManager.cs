@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -16,7 +15,6 @@ public class GameManager : MonoBehaviour
 	private GameObject _levelImage;
 	private int _level;
 	private List<Enemy> _enemies;
-	private bool _enemiesMoving;
 	private bool _doingSetup;
 
 	// Use this for initialization
@@ -60,10 +58,8 @@ public class GameManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		if (_enemiesMoving || _doingSetup)
+		if (_doingSetup)
 			return;
-
-		StartCoroutine(MoveEnemies());
 	}
 
 	public void AddEnemyToList(Enemy enemy)
@@ -80,22 +76,6 @@ public class GameManager : MonoBehaviour
 			_enemies.Remove(enemy);
 			Destroy(enemy.gameObject);
 		}
-	}
-
-	IEnumerator MoveEnemies()
-	{
-		_enemiesMoving = true;
-		if (_enemies.Count == 0)
-		{
-			yield return new WaitForSeconds(0);
-		}
-
-		foreach (var enemy in _enemies)
-		{
-			enemy.MoveEnemy();
-			yield return new WaitForSeconds(0);
-		}
-		_enemiesMoving = false;
 	}
 
 	public void ChangeScene()
