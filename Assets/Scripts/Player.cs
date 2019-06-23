@@ -18,7 +18,7 @@ public class Player : MovingObject
 	private float vertical = 0;
 	private float moveLimiter = 0.7f;
 
-	private float attackRange = 1.25f;
+	private float attackRange = 1.6f;
 	private float attackRate = 1.0f;
 	private float nextAttack = 0f;
 

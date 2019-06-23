@@ -91,12 +91,12 @@ public class BoardManager : MonoBehaviour {
 
 	public void SetupScene(int level)
 	{
-		BoardSetup();
-		InitialiseList();
-		LayoutObjectAtRandom(WallTiles, WallCount.Minimum, WallCount.Maximum);
-		LayoutObjectAtRandom(SpriteStorage.Instance.GetLoot(), LootCount.Minimum, LootCount.Maximum);
-		int enemyCount = (int) Mathf.Log(level, 2f);
-		LayoutObjectAtRandom(EnemyTiles, enemyCount, enemyCount);
-		Instantiate(Exit, new Vector3(Columns - 1, Rows - 1, 0f), Quaternion.identity);
+		//BoardSetup();
+		//InitialiseList();
+		//LayoutObjectAtRandom(WallTiles, WallCount.Minimum, WallCount.Maximum);
+		//LayoutObjectAtRandom(SpriteStorage.Instance.GetLoot(), LootCount.Minimum, LootCount.Maximum);
+		//int enemyCount = (int) Mathf.Log(level, 2f);
+		//LayoutObjectAtRandom(EnemyTiles, enemyCount, enemyCount);
+		//Instantiate(Exit, new Vector3(Columns - 1, Rows - 1, 0f), Quaternion.identity);
 	}
 }

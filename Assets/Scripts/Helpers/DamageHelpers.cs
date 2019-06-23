@@ -46,6 +46,7 @@ public static class DamageHelpers
 
 		if (heading.sqrMagnitude < attackRange * attackRange)
 			return true;
+
 		return false;
 	}
 }
