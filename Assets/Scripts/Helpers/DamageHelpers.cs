@@ -6,12 +6,12 @@ public static class DamageHelpers
 	{
 		foreach (var collider in colliders)
 		{
-			if (collider != null && collider.gameObject.tag == "Enemy")
+			if (collider != null && collider.gameObject.CompareTag("Enemy"))
 			{
 				var enemy = collider.gameObject.GetComponent<Enemy>();
 				enemy.ModifyHealth(-damage);
 			}
-			if (collider != null && collider.gameObject.tag == "Untagged")
+			if (collider != null && collider.gameObject.CompareTag("Untagged"))
 			{
 				var wall = collider.gameObject.GetComponent<Wall>();
 				if (wall != null)
@@ -24,12 +24,12 @@ public static class DamageHelpers
 
 	public static void DealDamageToTarget(this Collider2D collider, int damage)
 	{
-		if (collider != null && collider.gameObject.tag == "Enemy")
+		if (collider != null && collider.gameObject.CompareTag("Enemy"))
 		{
 			var enemy = collider.gameObject.GetComponent<Enemy>();
 			enemy.ModifyHealth(-damage);
 		}
-		if (collider != null && collider.gameObject.tag == "Untagged")
+		if (collider != null && collider.gameObject.CompareTag("Untagged"))
 		{
 			var wall = collider.gameObject.GetComponent<Wall>();
 			if (wall != null)

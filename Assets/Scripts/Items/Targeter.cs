@@ -20,7 +20,6 @@ namespace Assets.Scripts.Items
 		
 		public override Collider2D[] AquireTargets(float radius = 1f)
 		{
-			//Physics2D.CircleCast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), _radius, );
 			var hitColliders = Physics2D.OverlapCircleAll(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y), radius, _blockingLayer);
 			return hitColliders;
 		}

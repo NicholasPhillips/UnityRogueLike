@@ -121,12 +121,12 @@ public class Player : MovingObject
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag == "Exit")
+		if (other.CompareTag("Exit"))
 		{
 			Invoke("Restart", RestartLevelDelay);
 			enabled = false;
 		}
-		else if (other.tag == "Loot")
+		else if (other.CompareTag("Loot"))
 		{
 			var loot = other.gameObject.GetComponent<GameWorldItem>();
 			var item = ScriptableObject.CreateInstance<Item>();
