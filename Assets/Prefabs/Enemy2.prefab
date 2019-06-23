@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -900995045
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300084, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &95000013758429078
@@ -121,7 +121,6 @@ MonoBehaviour:
   PlayerDamage: 20
   Health: 1
   speed: 5
-  attackRange: 2
 --- !u!58 &-6203937351320676012
 CircleCollider2D:
   m_ObjectHideFlags: 0
