@@ -18,6 +18,9 @@ public class Enemy : MovingObject
 	private float attackRange = 1.25f;
 	private float attackRate = 1.0f;
 	private float nextAttack = 0f;
+	private float detectionRange = 10f;
+
+	private bool _detectedPlayer = false;
 
 	protected override void Start ()
 	{
@@ -43,9 +46,32 @@ public class Enemy : MovingObject
 	{
 		float xDir = 0;
 		float yDir = 0;
+		
+		//precompute our ray settings
+		Vector3 start = transform.position;
+		Vector3 direction = (_player.transform.position - transform.position).normalized;
+		float distance = detectionRange;
+
+		//draw the ray in the editor
+		Debug.DrawRay(start, direction * distance, Color.red);
 
 		var heading = _target.position - transform.position;
-		var direction = heading / heading.magnitude;
+
+		RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8);
+		foreach(var sightTest in sightTests)
+		{
+			if (sightTest.collider.gameObject != gameObject)
+			{
+				if(sightTest.collider.gameObject.CompareTag("Player"))
+				{
+					_detectedPlayer = true;
+				}
+				break;
+			}
+		}
+
+		if (!_detectedPlayer)
+			return;
 
 		if(heading.sqrMagnitude < attackRange * attackRange) { 
 			if(Time.time > nextAttack)

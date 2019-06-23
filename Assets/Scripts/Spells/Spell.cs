@@ -33,7 +33,7 @@ public class TargetSpell : Spell
 
 	public override void UseSpell()
 	{
-		_effect.OnUse(_targeter.AquireTargets());
+		_effect.OnUse(_targeter.AquireTargets(1f));
 		GameManager.Instance.EffectScript.DisplaySpellEffect(_visualEffectKey);
 	}
 }
