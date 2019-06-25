@@ -23,6 +23,7 @@ public class Player : MovingObject
 	private float nextAttack = 0f;
 
 	private TDCharacterController2D _controller;
+	private GameObject _inventoryPanel;
 
 	private MouseTargeter mouseTargeter = new MouseTargeter();
 
@@ -31,6 +32,7 @@ public class Player : MovingObject
 	{
 		_controller = GetComponent<TDCharacterController2D>();
 		_animator = GetComponent<Animator>();
+		_inventoryPanel = GameObject.Find("Canvas").transform.Find("InventoryPanel").gameObject;
 		Inventory.Instance.OnEquippableItemAdded += SetAttributes;
 		SetAttributes(this, null);
 		_currentHealthPoints = 100;
@@ -66,12 +68,12 @@ public class Player : MovingObject
 
 		if (Input.GetKeyUp(KeyCode.I))
 		{
-			GameObject.Find("Canvas").transform.Find("InventoryPanel").gameObject.SetActive(!GameObject.Find("Canvas").transform.Find("InventoryPanel").gameObject.activeSelf);
+			_inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
 		}
 
 		if (Input.GetMouseButtonUp(1))
 		{
-			Inventory.Instance.Spell.UseSpell();
+			SpellBook.Instance.UseFireballSpell(gameObject.transform.position);
 		}
 
 		if (Input.GetMouseButton(0))

@@ -15,7 +15,7 @@ namespace Assets.Scripts.Items
 
 		public MouseTargeter()
 		{
-			_blockingLayer = 1 << 8;
+			_blockingLayer = 1 << 8 | 1 << 9 | 1 << 10;
 		}
 		
 		public override Collider2D[] AquireTargets(float radius = 1f)

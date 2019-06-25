@@ -19,9 +19,9 @@ TagManager:
   - 
   - 
   - BlockingLayer
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Spell
   - 
   - 
   - 

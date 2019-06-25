@@ -3,8 +3,6 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
-	public LayerMask BlockingLayer;
-
 	private BoxCollider2D _boxCollider;
 	private Rigidbody2D _rb2D;
 

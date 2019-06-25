@@ -57,7 +57,7 @@ public class Enemy : MovingObject
 
 		var heading = _target.position - transform.position;
 
-		RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8);
+		RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8 | 1 << 9 | 1 << 10);
 		foreach(var sightTest in sightTests)
 		{
 			if (sightTest.collider.gameObject != gameObject)
