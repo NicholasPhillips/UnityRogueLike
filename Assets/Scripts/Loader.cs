@@ -7,7 +7,8 @@ public class Loader : MonoBehaviour
 	public GameObject gameManager;
 	public GameObject inventory;
 	public GameObject spriteStorage;
-	
+	public GameObject spellBook;
+
 	void Awake ()
 	{
 		if (GameManager.Instance == null)
@@ -18,5 +19,8 @@ public class Loader : MonoBehaviour
 
 		if (SpriteStorage.Instance == null)
 			Instantiate(spriteStorage);
+
+		if (SpellBook.Instance == null)
+			Instantiate(spellBook);
 	}
 }

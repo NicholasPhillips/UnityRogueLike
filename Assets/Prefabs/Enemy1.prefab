@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1883141183732479803}
   - component: {fileID: 5278494328189556876}
   - component: {fileID: -3746412890859297236}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -117,11 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockingLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1792
   PlayerDamage: 10
   Health: 1
   speed: 5
-  attackRange: 2
 --- !u!58 &1883141183732479803
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1792
   raycastLead: 0.15
   drawDebug: 0

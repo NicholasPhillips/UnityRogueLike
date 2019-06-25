@@ -1151,6 +1151,12 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014113331194, guid: 7e46de4393fda0a438caf4239ff18d43,
+        type: 3}
+      propertyPath: spellBook
+      value: 
+      objectReference: {fileID: 990858379897271302, guid: b655f5a3fa2a0304e9a8d28f4b7aa9bd,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e46de4393fda0a438caf4239ff18d43, type: 3}
 --- !u!1001 &436095207
@@ -7117,7 +7123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   raycastLead: 0.15
   drawDebug: 0
 --- !u!50 &1180146003
