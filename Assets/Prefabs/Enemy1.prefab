@@ -115,9 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231175cb695ab8f4b8196dd8656e4957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockingLayer:
-    serializedVersion: 2
-    m_Bits: 1792
   PlayerDamage: 10
   Health: 1
   speed: 5
