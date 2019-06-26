@@ -25,8 +25,6 @@ public class Player : MovingObject
 	private TDCharacterController2D _controller;
 	private GameObject _inventoryPanel;
 
-	private MouseTargeter mouseTargeter = new MouseTargeter();
-
 	// Use this for initialization
 	protected override void Start()
 	{
@@ -80,7 +78,7 @@ public class Player : MovingObject
 		{
 			if (Time.time > nextAttack)
 			{
-				var collisions = mouseTargeter.AquireTargets();
+				var collisions = MouseTargeter.AquireTargets();
 				var target = collisions.FirstOrDefault();
 				if(target != null)
 				{

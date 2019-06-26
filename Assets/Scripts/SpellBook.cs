@@ -21,7 +21,8 @@ public class SpellBook : MonoBehaviour
 	{
 		var obj = Instantiate(Fireball, position, Quaternion.identity);
 		var fireball = obj.GetComponent<Fireball>();
-		var target = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		fireball.setTarget((target - position).normalized);
+		var source = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		var target = (source - position).normalized;
+		fireball.setTarget(target);
 	}
 }

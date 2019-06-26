@@ -13,10 +13,7 @@ public class Inventory : MonoBehaviour
 	public List<Item> InventoryItems = new List<Item>();
 
 	public Helmet Helmet;
-
-
-	public TargetSpell Spell;
-
+	
 	public List<Item> EquippableItems
 	{
 		get
@@ -39,11 +36,6 @@ public class Inventory : MonoBehaviour
 			Instance = this;
 		else if (Instance != this)
 			Destroy(gameObject);
-
-		if (Spell == null)
-		{
-			Spell = new TargetSpell();			
-		}
 
 		DontDestroyOnLoad(gameObject);
 	}
