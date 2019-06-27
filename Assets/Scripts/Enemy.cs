@@ -1,10 +1,12 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MovingObject
 {
 	public int PlayerDamage;
-	public int Health = 1;
+	public int Health = 10;
+	private int maxHealth;
 	public event EventHandler OnEnemyDeath;
 	public float speed = 5f;
 
@@ -19,6 +21,10 @@ public class Enemy : MovingObject
 	private float attackRate = 1.0f;
 	private float nextAttack = 0f;
 	private float detectionRange = 10f;
+	public CanvasGroup HealthGroup;
+	public GameObject HealthFillGameObject;
+	private RectTransform healthFill;
+//	public GameObject NumberDisplay;	
 
 	private bool _detectedPlayer = false;
 
@@ -26,9 +32,11 @@ public class Enemy : MovingObject
 	{
 		_controller = GetComponent<TDCharacterController2D>();
 		GameManager.Instance.AddEnemyToList(this);
-		_animator = GetComponent<Animator>();
+		//_animator = GetComponent<Animator>();
 		_target = GameObject.FindGameObjectWithTag("Player").transform;
 		_player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();
+		healthFill = HealthFillGameObject.GetComponent<RectTransform>();
+		maxHealth = Health;
 		base.Start();
 	}
 
@@ -40,6 +48,13 @@ public class Enemy : MovingObject
 		{
 			OnEnemyDeath?.Invoke(this, null);
 		}
+		if(Health > maxHealth)
+		{
+			maxHealth = Health;
+		}
+		//var gui = Instantiate(NumberDisplay);
+		//gui.GetComponent<TextMeshProUGUI>().text = Math.Abs(value).ToString();
+		healthFill.sizeDelta = new Vector2(Math.Min((float)Health / maxHealth, 1f), healthFill.sizeDelta.y);
 	}
 
 	void FixedUpdate()
@@ -77,7 +92,7 @@ public class Enemy : MovingObject
 			if(Time.time > nextAttack)
 			{
 				nextAttack = Time.time + attackRate;
-				_animator.SetTrigger("EnemyAttack");
+				//_animator.SetTrigger("EnemyAttack");
 				_player.ModifyHealth(-PlayerDamage);
 			}
 			return;
