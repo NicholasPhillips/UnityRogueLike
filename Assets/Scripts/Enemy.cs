@@ -24,6 +24,7 @@ public class Enemy : MovingObject
 	public CanvasGroup HealthGroup;
 	public GameObject HealthFillGameObject;
 	private RectTransform healthFill;
+	public GameObject DamageText;
 //	public GameObject NumberDisplay;	
 
 	private bool _detectedPlayer = false;
@@ -52,8 +53,9 @@ public class Enemy : MovingObject
 		{
 			maxHealth = Health;
 		}
-		//var gui = Instantiate(NumberDisplay);
-		//gui.GetComponent<TextMeshProUGUI>().text = Math.Abs(value).ToString();
+		var damageText = Instantiate(DamageText, gameObject.transform.position, Quaternion.identity);
+		var floatingNumber = damageText.GetComponent<FloatingNumber>();
+		floatingNumber.UIText.text = Math.Abs(value).ToString();
 		healthFill.sizeDelta = new Vector2(Math.Min((float)Health / maxHealth, 1f), healthFill.sizeDelta.y);
 	}
 

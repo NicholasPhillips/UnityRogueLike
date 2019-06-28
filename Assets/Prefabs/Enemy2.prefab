@@ -121,6 +121,8 @@ MonoBehaviour:
   speed: 5
   HealthGroup: {fileID: 7647737437780370368}
   HealthFillGameObject: {fileID: 4149381340125368664}
+  DamageText: {fileID: 5682882537786070305, guid: 531876185d967234f90bef0ba8bb808c,
+    type: 3}
 --- !u!58 &-6203937351320676012
 CircleCollider2D:
   m_ObjectHideFlags: 0
