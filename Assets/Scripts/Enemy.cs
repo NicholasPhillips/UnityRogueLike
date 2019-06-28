@@ -72,44 +72,44 @@ public class Enemy : MovingObject
 		//draw the ray in the editor
 		Debug.DrawRay(start, direction * distance, Color.red);
 
-		var heading = _target.position - transform.position;
+		//var heading = _target.position - transform.position;
 
-		RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8 | 1 << 9 | 1 << 10);
-		foreach(var sightTest in sightTests)
-		{
-			if (sightTest.collider.gameObject != gameObject)
-			{
-				if(sightTest.collider.gameObject.CompareTag("Player"))
-				{
-					_detectedPlayer = true;
-				}
-				break;
-			}
-		}
+		//RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8 | 1 << 9 | 1 << 10);
+		//foreach(var sightTest in sightTests)
+		//{
+		//	if (sightTest.collider.gameObject != gameObject)
+		//	{
+		//		if(sightTest.collider.gameObject.CompareTag("Player"))
+		//		{
+		//			_detectedPlayer = true;
+		//		}
+		//		break;
+		//	}
+		//}
 
-		if (!_detectedPlayer)
-			return;
+		//if (!_detectedPlayer)
+		//	return;
 
-		if(heading.sqrMagnitude < attackRange * attackRange) { 
-			if(Time.time > nextAttack)
-			{
-				nextAttack = Time.time + attackRate;
-				//_animator.SetTrigger("EnemyAttack");
-				_player.ModifyHealth(-PlayerDamage);
-			}
-			return;
-		}
+		//if(heading.sqrMagnitude < attackRange * attackRange) { 
+		//	if(Time.time > nextAttack)
+		//	{
+		//		nextAttack = Time.time + attackRate;
+		//		//_animator.SetTrigger("EnemyAttack");
+		//		_player.ModifyHealth(-PlayerDamage);
+		//	}
+		//	return;
+		//}
 		
-		yDir = direction.y;
-		xDir = direction.x;
-		if (xDir != 0 && yDir != 0) // Check for diagonal movement
-		{
-			// limit movement speed diagonally, so you move at 70% speed
-			xDir *= moveLimiter;
-			yDir *= moveLimiter;
-		}
+		//yDir = direction.y;
+		//xDir = direction.x;
+		//if (xDir != 0 && yDir != 0) // Check for diagonal movement
+		//{
+		//	// limit movement speed diagonally, so you move at 70% speed
+		//	xDir *= moveLimiter;
+		//	yDir *= moveLimiter;
+		//}
 
-		_controller.Move(new Vector2(xDir * speed * Time.deltaTime, yDir * speed * Time.deltaTime));
+		//_controller.Move(new Vector2(xDir * speed * Time.deltaTime, yDir * speed * Time.deltaTime));
 	}
 
 }
