@@ -13,7 +13,6 @@ public class Enemy : MovingObject
 	private Animator _animator;
 	private Transform _target;
 	private Player _player;
-	private bool _skipMove;
 	private TDCharacterController2D _controller;
 
 	private float moveLimiter = 0.7f;
@@ -27,7 +26,7 @@ public class Enemy : MovingObject
 	public GameObject DamageText;
 //	public GameObject NumberDisplay;	
 
-	private bool _detectedPlayer = false;
+	public bool detectedPlayer = false;
 
 	protected override void Start ()
 	{
@@ -75,23 +74,24 @@ public class Enemy : MovingObject
 		var heading = _target.position - transform.position;
 
 		RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8 | 1 << 9 | 1 << 10);
-		foreach(var sightTest in sightTests)
+		foreach (var sightTest in sightTests)
 		{
 			if (sightTest.collider.gameObject != gameObject)
 			{
-				if(sightTest.collider.gameObject.CompareTag("Player"))
+				if (sightTest.collider.gameObject.CompareTag("Player"))
 				{
-					_detectedPlayer = true;
+					detectedPlayer = true;
 				}
 				break;
 			}
 		}
 
-		if (!_detectedPlayer)
+		if (!detectedPlayer)
 			return;
 
-		if(heading.sqrMagnitude < attackRange * attackRange) { 
-			if(Time.time > nextAttack)
+		if (heading.sqrMagnitude < attackRange * attackRange)
+		{
+			if (Time.time > nextAttack)
 			{
 				nextAttack = Time.time + attackRate;
 				//_animator.SetTrigger("EnemyAttack");
@@ -99,17 +99,17 @@ public class Enemy : MovingObject
 			}
 			return;
 		}
-		
-		yDir = direction.y;
-		xDir = direction.x;
-		if (xDir != 0 && yDir != 0) // Check for diagonal movement
-		{
-			// limit movement speed diagonally, so you move at 70% speed
-			xDir *= moveLimiter;
-			yDir *= moveLimiter;
-		}
 
-		_controller.Move(new Vector2(xDir * speed * Time.deltaTime, yDir * speed * Time.deltaTime));
+		//yDir = direction.y;
+		//xDir = direction.x;
+		//if (xDir != 0 && yDir != 0) // Check for diagonal movement
+		//{
+		//	// limit movement speed diagonally, so you move at 70% speed
+		//	xDir *= moveLimiter;
+		//	yDir *= moveLimiter;
+		//}
+
+		//_controller.Move(new Vector2(xDir * speed * Time.deltaTime, yDir * speed * Time.deltaTime));
 	}
 
 }
