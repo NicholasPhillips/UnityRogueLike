@@ -33,16 +33,13 @@ public class SpellBook : MonoBehaviour
 
 	public GameObject GetPooledObject()
 	{
-		//1
 		for (int i = 0; i < Fireballs.Count; i++)
 		{
-			//2
 			if (!Fireballs[i].activeInHierarchy)
 			{
 				return Fireballs[i];
 			}
 		}
-		//3   
 		return null;
 	}
 
