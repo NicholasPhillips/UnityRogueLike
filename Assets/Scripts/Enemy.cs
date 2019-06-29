@@ -13,7 +13,6 @@ public class Enemy : MovingObject
 	private Animator _animator;
 	private Transform _target;
 	private Player _player;
-	private bool _skipMove;
 	private TDCharacterController2D _controller;
 
 	private float moveLimiter = 0.7f;
@@ -27,7 +26,7 @@ public class Enemy : MovingObject
 	public GameObject DamageText;
 //	public GameObject NumberDisplay;	
 
-	private bool _detectedPlayer = false;
+	public bool detectedPlayer = false;
 
 	protected override void Start ()
 	{
@@ -72,34 +71,35 @@ public class Enemy : MovingObject
 		//draw the ray in the editor
 		Debug.DrawRay(start, direction * distance, Color.red);
 
-		//var heading = _target.position - transform.position;
+		var heading = _target.position - transform.position;
 
-		//RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8 | 1 << 9 | 1 << 10);
-		//foreach(var sightTest in sightTests)
-		//{
-		//	if (sightTest.collider.gameObject != gameObject)
-		//	{
-		//		if(sightTest.collider.gameObject.CompareTag("Player"))
-		//		{
-		//			_detectedPlayer = true;
-		//		}
-		//		break;
-		//	}
-		//}
+		RaycastHit2D[] sightTests = Physics2D.RaycastAll(start, direction, distance, 1 << 8 | 1 << 9 | 1 << 10);
+		foreach (var sightTest in sightTests)
+		{
+			if (sightTest.collider.gameObject != gameObject)
+			{
+				if (sightTest.collider.gameObject.CompareTag("Player"))
+				{
+					detectedPlayer = true;
+				}
+				break;
+			}
+		}
 
-		//if (!_detectedPlayer)
-		//	return;
+		if (!detectedPlayer)
+			return;
 
-		//if(heading.sqrMagnitude < attackRange * attackRange) { 
-		//	if(Time.time > nextAttack)
-		//	{
-		//		nextAttack = Time.time + attackRate;
-		//		//_animator.SetTrigger("EnemyAttack");
-		//		_player.ModifyHealth(-PlayerDamage);
-		//	}
-		//	return;
-		//}
-		
+		if (heading.sqrMagnitude < attackRange * attackRange)
+		{
+			if (Time.time > nextAttack)
+			{
+				nextAttack = Time.time + attackRate;
+				//_animator.SetTrigger("EnemyAttack");
+				_player.ModifyHealth(-PlayerDamage);
+			}
+			return;
+		}
+
 		//yDir = direction.y;
 		//xDir = direction.x;
 		//if (xDir != 0 && yDir != 0) // Check for diagonal movement
