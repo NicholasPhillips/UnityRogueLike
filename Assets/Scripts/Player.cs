@@ -30,7 +30,7 @@ public class Player : MovingObject
 	{
 		_controller = GetComponent<TDCharacterController2D>();
 		_animator = GetComponent<Animator>();
-		_inventoryPanel = GameObject.Find("Canvas").transform.Find("InventoryPanel").gameObject;
+		_inventoryPanel = GameManager.Instance.inventoryPanel;
 		Inventory.Instance.OnEquippableItemAdded += SetAttributes;
 		SetAttributes(this, null);
 		_currentHealthPoints = 100;

@@ -20,7 +20,7 @@ public class HealSelf : SelfEffect
 
 	public override void OnUse()
 	{
-		GameObject.Find("Player").GetComponent<Player>().ModifyHealth(Value);
+		GameManager.Instance.player.ModifyHealth(Value);
 	}
 }
 
@@ -35,7 +35,7 @@ public class DamageSelf : SelfEffect
 
 	public override void OnUse()
 	{
-		GameObject.Find("Player").GetComponent<Player>().ModifyHealth(Value);
+		GameManager.Instance.player.ModifyHealth(Value);
 	}
 }
 

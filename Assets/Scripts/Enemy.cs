@@ -33,8 +33,8 @@ public class Enemy : MovingObject
 		_controller = GetComponent<TDCharacterController2D>();
 		GameManager.Instance.AddEnemyToList(this);
 		//_animator = GetComponent<Animator>();
-		_target = GameObject.FindGameObjectWithTag("Player").transform;
-		_player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();
+		_target = GameManager.Instance.playerTransform;
+		_player = GameManager.Instance.player;
 		healthFill = HealthFillGameObject.GetComponent<RectTransform>();
 		maxHealth = Health;
 		base.Start();

@@ -8,13 +8,16 @@ public class GameManager : MonoBehaviour
 {
 	public float LevelStartDelay = 0f;
 	public static GameManager Instance;
-	public BoardManager BoardScript;
 	public EffectManager EffectScript;
+	public Player player;
+	public Transform playerTransform;
+	public GameObject exit;
+	public GameObject inventoryPanel;
 
 	private Text _levelText;
 	private GameObject _levelImage;
 	private int _level;
-	private List<Enemy> _enemies;
+	public List<Enemy> enemies;
 	private bool _doingSetup;
 
 	// Use this for initialization
@@ -25,9 +28,12 @@ public class GameManager : MonoBehaviour
 		else if(Instance != this)
 			Destroy(gameObject);
 		DontDestroyOnLoad(gameObject);
-		_enemies = new List<Enemy>();
-		BoardScript = GetComponent<BoardManager>();
+		enemies = new List<Enemy>();
 		EffectScript = GetComponent<EffectManager>();
+		playerTransform = GameObject.Find("Player").transform;
+		player = GameObject.Find("Player").GetComponent<Player>();
+		inventoryPanel = GameObject.Find("Canvas").transform.Find("InventoryPanel").gameObject;
+		exit = GameObject.Find("Exit");
 	}
 
 	void InitGame()
@@ -39,8 +45,7 @@ public class GameManager : MonoBehaviour
 		_levelImage.SetActive(true);
 		Invoke("HideLevelImage", LevelStartDelay);
 
-		_enemies.Clear();
-		BoardScript.SetupScene(_level);
+		enemies.Clear();
 	}
 
 	private void HideLevelImage()
@@ -51,7 +56,7 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
-		_levelText.text = "After " + _level + " days, you starved.";
+		_levelText.text = "After " + _level + " days, you died.";
 		_levelImage.SetActive(true);
 		enabled = false;
 	}
@@ -65,7 +70,7 @@ public class GameManager : MonoBehaviour
 	public void AddEnemyToList(Enemy enemy)
 	{
 		enemy.OnEnemyDeath += Enemy_OnEnemyDeath;
-		_enemies.Add(enemy);
+		enemies.Add(enemy);
 	}
 
 	private void Enemy_OnEnemyDeath(object sender, EventArgs e)
@@ -73,7 +78,7 @@ public class GameManager : MonoBehaviour
 		var enemy = sender as Enemy;
 		if (enemy != null)
 		{
-			_enemies.Remove(enemy);
+			enemies.Remove(enemy);
 			Destroy(enemy.gameObject);
 		}
 	}
