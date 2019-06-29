@@ -15,7 +15,6 @@ public class Enemy : MovingObject
 	private Player _player;
 	private TDCharacterController2D _controller;
 
-	private float moveLimiter = 0.7f;
 	private float attackRange = 1.25f;
 	private float attackRate = 1.0f;
 	private float nextAttack = 0f;
@@ -59,10 +58,7 @@ public class Enemy : MovingObject
 	}
 
 	void FixedUpdate()
-	{
-		float xDir = 0;
-		float yDir = 0;
-		
+	{		
 		//precompute our ray settings
 		Vector3 start = transform.position;
 		Vector3 direction = (_player.transform.position - transform.position).normalized;
@@ -99,17 +95,6 @@ public class Enemy : MovingObject
 			}
 			return;
 		}
-
-		//yDir = direction.y;
-		//xDir = direction.x;
-		//if (xDir != 0 && yDir != 0) // Check for diagonal movement
-		//{
-		//	// limit movement speed diagonally, so you move at 70% speed
-		//	xDir *= moveLimiter;
-		//	yDir *= moveLimiter;
-		//}
-
-		//_controller.Move(new Vector2(xDir * speed * Time.deltaTime, yDir * speed * Time.deltaTime));
 	}
 
 }

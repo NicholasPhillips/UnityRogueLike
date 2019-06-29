@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 		else if(Instance != this)
 			Destroy(gameObject);
-		DontDestroyOnLoad(gameObject);
+
 		enemies = new List<Enemy>();
 		EffectScript = GetComponent<EffectManager>();
 		playerTransform = GameObject.Find("Player").transform;

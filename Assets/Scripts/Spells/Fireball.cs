@@ -1,6 +1,4 @@
 ﻿using Assets.Scripts.Items;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -16,6 +14,7 @@ public class Fireball : MonoBehaviour
 	CircleCollider2D _collider;
 	float moveLimiter = 0.7f;
 	bool isMoving = true;
+	bool isTriggered = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -48,12 +47,28 @@ public class Fireball : MonoBehaviour
 		}
 		else if(!_particleSystem.isPlaying)
 		{
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}		
     }
 
+	private void OnDisable()
+	{
+		isMoving = true;
+		isTriggered = false;
+		if(_spriteRenderer != null)
+			_spriteRenderer.enabled = true;
+		if(_collider != null)
+			_collider.enabled = true;
+		
+	}
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		if (isTriggered)
+			return;
+
+
+		isTriggered = true;
 		var targets = PositionTargeter.AquireTargets(gameObject.transform.position, 1f);
 		foreach(var target in targets)
 		{
