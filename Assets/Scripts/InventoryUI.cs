@@ -64,7 +64,10 @@ public class InventoryUI : MonoBehaviour
 
 	void OnDisable()
 	{
-		_inventory.OnInventoryItemAdded -= UpdateInventorySlotsUI;
-		_inventory.OnEquippableItemAdded -= UpdateEquippableSlotsUI;
+		if(_inventory != null)
+		{
+			_inventory.OnInventoryItemAdded -= UpdateInventorySlotsUI;
+			_inventory.OnEquippableItemAdded -= UpdateEquippableSlotsUI;
+		}		
 	}
 }
