@@ -19,14 +19,12 @@ public class EnemyAi : MonoBehaviour
 	private Vector2 force;
 	private float distance;
 	private Enemy enemy;
-	private GameObject exit;
 
 	void Start()
 	{
 		seeker = GetComponent<Seeker>();
 		rb = GetComponent<Rigidbody2D>();
 		enemy = GetComponent<Enemy>();
-		exit = GameObject.Find("Exit");
 		InvokeRepeating("UpdatePath", 0f, 0.5f);		
 	}
 
@@ -36,7 +34,7 @@ public class EnemyAi : MonoBehaviour
 		{
 			if(enemy.Health < 5)
 			{
-				seeker.StartPath(rb.position, exit.transform.position, OnPathComplete);
+				seeker.StartPath(rb.position, GameManager.Instance.exit.transform.position, OnPathComplete);
 			} else
 			{
 				seeker.StartPath(rb.position, target.position, OnPathComplete);
