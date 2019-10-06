@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpellBook : MonoBehaviour
 {
@@ -20,7 +21,17 @@ public class SpellBook : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	void Start()
+	void OnEnable()
+	{
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+	}
+
+	void OnDisable()
+	{
+		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+	}
+
+	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
 	{
 		Fireballs = new List<GameObject>();
 		for (int i = 0; i < AmountToPool; i++)
