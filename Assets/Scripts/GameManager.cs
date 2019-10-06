@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
 	public GameObject exit;
 	public GameObject inventoryPanel;
 
-	private Text _levelText;
-	private GameObject _levelImage;
 	private int _level;
 	public List<Enemy> enemies;
 	private bool _doingSetup;
@@ -39,25 +37,12 @@ public class GameManager : MonoBehaviour
 	void InitGame()
 	{
 		_doingSetup = true;
-		_levelImage = GameObject.Find("LevelImage");
-		_levelText = GameObject.Find("LevelText").GetComponent<Text>();
-		_levelText.text = "Day " + _level;
-		_levelImage.SetActive(true);
-		Invoke("HideLevelImage", LevelStartDelay);
 
 		enemies.Clear();
 	}
 
-	private void HideLevelImage()
-	{
-		_levelImage.SetActive(false);
-		_doingSetup = false;
-	}
-
 	public void GameOver()
 	{
-		_levelText.text = "After " + _level + " days, you died.";
-		_levelImage.SetActive(true);
 		enabled = false;
 	}
 	
